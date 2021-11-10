@@ -9,12 +9,16 @@ const background = () => {
     background.classList.add('homepage-background');
     background.src = bgImg;
 
+    const shadow = document.createElement('div');
+    shadow.classList.add('shadow');
+
     const logo = new Image();
     logo.classList.add('background-logo');
     logo.src = bgLogo;
 
     document.body.appendChild(bgContainer);
     bgContainer.appendChild(background);
+    bgContainer.appendChild(shadow);
     bgContainer.appendChild(logo);
 };
 
@@ -57,7 +61,7 @@ const footerSetup = () => {
     home_a.href = "index.html";
     const homeSpan = document.createElement('span');
     homeSpan.classList.add('material-icons');
-    homeSpan.innerText = 'home';
+    homeSpan.innerText = 'wb_sunny';
 
     const favorite = document.createElement('button');
     favorite.id = 'homeButton';
