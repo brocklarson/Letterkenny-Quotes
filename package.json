@@ -1,0 +1,29 @@
+{
+    "name": "letterkenny-quotes",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "webpack --watch",
+        "start": "webpack serve --open",
+        "server": "node server.js",
+        "build": "webpack"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brocklarson/Letterkenny-Quotes.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/brocklarson/Letterkenny-Quotes/issues"
+    },
+    "homepage": "https://github.com/brocklarson/Letterkenny-Quotes#readme",
+    "devDependencies": {
+        "webpack": "^5.63.0",
+        "webpack-cli": "^4.9.1",
+        "webpack-dev-server": "^4.4.0"
+    }
+}

@@ -1,4 +1,24 @@
-const headerSetup = (() => {
+import bgImg from './images/bg.jpg';
+import bgLogo from './images/dog-logo.png';
+
+const background = () => {
+    const bgContainer = document.createElement('div');
+    bgContainer.classList.add('background');
+
+    const background = new Image();
+    background.classList.add('homepage-background');
+    background.src = bgImg;
+
+    const logo = new Image();
+    logo.classList.add('background-logo');
+    logo.src = bgLogo;
+
+    document.body.appendChild(bgContainer);
+    bgContainer.appendChild(background);
+    bgContainer.appendChild(logo);
+};
+
+const headerSetup = () => {
     const header = document.querySelector('header');
 
     const title = document.createElement('div');
@@ -25,9 +45,9 @@ const headerSetup = (() => {
     title.appendChild(titleText);
     favorite.appendChild(favoriteSpan);
     copy.appendChild(copySpan);
-})();
+};
 
-const footerSetup = (() => {
+const footerSetup = () => {
     const footer = document.querySelector('footer');
 
     const home = document.createElement('button');
@@ -78,8 +98,6 @@ const footerSetup = (() => {
     search_a.appendChild(searchSpan)
     random.appendChild(random_a);
     random_a.appendChild(randomSpan);
-})();
+};
 
-const quotes = (() => {
-
-})();
+export { background, headerSetup, footerSetup };
