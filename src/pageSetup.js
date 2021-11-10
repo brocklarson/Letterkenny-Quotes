@@ -31,12 +31,14 @@ const headerSetup = () => {
     titleText.innerText = 'Letterkenny Quotes';
 
     const favorite = document.createElement('div');
+    favorite.id = 'setFavoriteBtn';
     favorite.classList.add('favorite-container', 'header-icon');
     const favoriteSpan = document.createElement('span');
     favoriteSpan.classList.add('material-icons-outlined');
     favoriteSpan.innerText = 'favorite_border'
 
     const copy = document.createElement('div');
+    copy.id = 'copyBtn';
     copy.classList.add('copy-container', 'header-icon');
     const copySpan = document.createElement('span');
     copySpan.classList.add('material-icons-outlined');
@@ -64,7 +66,7 @@ const footerSetup = () => {
     homeSpan.innerText = 'wb_sunny';
 
     const favorite = document.createElement('button');
-    favorite.id = 'homeButton';
+    favorite.id = 'favoriteBtn';
     favorite.classList.add('footer-buttons');
     const favorite_a = document.createElement('a');
     favorite_a.href = 'index.html';
@@ -73,7 +75,7 @@ const footerSetup = () => {
     favoriteSpan.innerText = 'favorite';
 
     const search = document.createElement('button');
-    search.id = 'homeButton';
+    search.id = 'searchBtn';
     search.classList.add('footer-buttons');
     const search_a = document.createElement('a');
     search_a.href = 'index.html';
@@ -82,10 +84,9 @@ const footerSetup = () => {
     searchSpan.innerText = 'search';
 
     const random = document.createElement('button');
-    random.id = 'homeButton';
+    random.id = 'rndBtn';
     random.classList.add('footer-buttons');
     const random_a = document.createElement('a');
-    random_a.href = 'index.html';
     const randomSpan = document.createElement('span');
     randomSpan.classList.add('material-icons');
     randomSpan.innerText = 'shuffle';

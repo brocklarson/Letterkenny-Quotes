@@ -14,8 +14,6 @@ class Quotes {
         else this.favorite = true;
     };
 }
-
-
 let quoteLib = [];
 
 function createLib() {
@@ -23,12 +21,19 @@ function createLib() {
         quoteLib.push(new Quotes(item.quote, item.quoter, item.favorite));
     })
 }
+
 const quoteList = [{
-    quote: `If you have a problem with the majestic Canadian Goose, then you have a problem with me.`,
-    quoter: [`Wayne`],
-    favorite: false
-}]
+        quote: `If you have a problem with the majestic Canadian Goose, then you have a problem with me.`,
+        quoter: [`Wayne`],
+        favorite: false
+    },
+    {
+        quote: `Allegedly`,
+        quoter: [`Squirrely Dan`],
+        favorite: false
+    }
+]
+
 
 createLib();
-
 export { quoteLib }
