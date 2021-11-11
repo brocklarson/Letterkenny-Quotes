@@ -17,12 +17,8 @@ const buttonFunction = (() => {
     const rndBtn = document.getElementById('rndBtn');
 
     //Events
-    copyBtn.addEventListener('click', function() {
-        copyTextToClipboard(quote.innerText);
-    });
-    setFavoriteBtn.addEventListener('click', function() {
-        quoteLib[getQuoteNum()].setFavorite();
-    });
+    copyBtn.addEventListener('click', copyQuote);
+    setFavoriteBtn.addEventListener('click', setAsFavorite);
     rndBtn.addEventListener('click', setRandQuote);
 
     (function setQuoteOfDay() {
@@ -45,6 +41,14 @@ const buttonFunction = (() => {
         console.log(index);
         quote.innerText = quoteLib[index].quote;
         quoters.innerText = quoteLib[index].quoter.join(', ');
+    }
+
+    function setAsFavorite() {
+        quoteLib[getQuoteNum()].setFavorite();
+    }
+
+    function copyQuote() {
+        copyTextToClipboard(quote.innerText);
     }
 
     //COPY TO CLIPBOARD

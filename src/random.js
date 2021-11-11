@@ -17,20 +17,26 @@ const buttonFunction = (() => {
     const randQuote = document.getElementById('randQuote');
 
     //Events
-    copyBtn.addEventListener('click', function() {
-        copyTextToClipboard(quote.innerText);
-    });
-    setFavoriteBtn.addEventListener('click', function() {
-        quoteLib[getQuoteNum()].setFavorite();
-    });
+    copyBtn.addEventListener('click', copyQuote);
+    setFavoriteBtn.addEventListener('click', setAsFavorite);
     randQuote.addEventListener('click', setRandQuote)
 
     function setRandQuote() {
         const index = Math.floor(Math.random() * quoteLib.length);
+        console.log(index);
         quote.innerText = quoteLib[index].quote;
         quoters.innerText = quoteLib[index].quoter.join(', ');
     }
     setRandQuote();
+
+    function setAsFavorite() {
+        const index = quoteLib.findIndex(element => element.quote === quote.innerText);
+        quoteLib[index].setFavorite();
+    }
+
+    function copyQuote() {
+        copyTextToClipboard(quote.innerText);
+    }
 
     //COPY TO CLIPBOARD
     function fallbackCopyTextToClipboard(text) {
