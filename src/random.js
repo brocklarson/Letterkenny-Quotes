@@ -5,7 +5,7 @@ import { quoteLib } from './quotes.js';
     background();
     headerSetup();
     footerSetup();
-    document.getElementById('homeBtn').focus();
+    document.getElementById('rndBtn').focus();
 })();
 
 const buttonFunction = (() => {
@@ -14,7 +14,6 @@ const buttonFunction = (() => {
     const quoters = document.getElementById('quoters');
     const copyBtn = document.getElementById('copyBtn');
     const setFavoriteBtn = document.getElementById('setFavoriteBtn');
-    const rndBtn = document.getElementById('rndBtn');
 
     //Events
     copyBtn.addEventListener('click', function() {
@@ -23,21 +22,6 @@ const buttonFunction = (() => {
     setFavoriteBtn.addEventListener('click', function() {
         quoteLib[getQuoteNum()].setFavorite();
     });
-    rndBtn.addEventListener('click', setRandQuote);
-
-    (function setQuoteOfDay() {
-        const index = getQuoteNum();
-        quote.innerText = quoteLib[index].quote;
-        quoters.innerText = quoteLib[index].quoter.join(', ');
-    })();
-
-    function getQuoteNum() {
-        const epoch = new Date(2000, 1, 1);
-        const today = new Date();
-        const diffInDays = Math.ceil((today - epoch) / (24 * 60 * 60 * 1000));
-        const index = diffInDays % quoteLib.length;
-        return index;
-    }
 
     function setRandQuote() {
         document.querySelector('h1').innerText = `Random Quote`
@@ -46,6 +30,7 @@ const buttonFunction = (() => {
         quote.innerText = quoteLib[index].quote;
         quoters.innerText = quoteLib[index].quoter.join(', ');
     }
+    setRandQuote();
 
     //COPY TO CLIPBOARD
     function fallbackCopyTextToClipboard(text) {

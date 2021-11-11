@@ -1,5 +1,17 @@
 import bgImg from './images/bg.jpg';
 import bgLogo from './images/dog-logo.png';
+import wayneImg from './images/wayne.png';
+import darylImg from './images/daryl.png';
+import danImg from './images/dan.png';
+import coachImg from './images/coach.png';
+import gailImg from './images/gail.png';
+import katyImg from './images/katy.png';
+import glenImg from './images/glen.png';
+import mcmurrayImg from './images/mcmurray.png';
+import tanisImg from './images/tanis.png';
+import reillyJonesyImg from './images/reilly-jonesy.png';
+import shoresyImg from './images/shoresy.png';
+import stewartImg from './images/stewart.png';
 
 const background = () => {
     const bgContainer = document.createElement('div');
@@ -57,7 +69,7 @@ const footerSetup = () => {
     const footer = document.querySelector('footer');
 
     const home = document.createElement('button');
-    home.id = 'homeButton';
+    home.id = 'homeBtn';
     home.classList.add('footer-buttons');
     const home_a = document.createElement('a');
     home_a.href = "index.html";
@@ -78,7 +90,7 @@ const footerSetup = () => {
     search.id = 'searchBtn';
     search.classList.add('footer-buttons');
     const search_a = document.createElement('a');
-    search_a.href = 'index.html';
+    search_a.href = 'search.html';
     const searchSpan = document.createElement('span');
     searchSpan.classList.add('material-icons');
     searchSpan.innerText = 'search';
@@ -87,6 +99,7 @@ const footerSetup = () => {
     random.id = 'rndBtn';
     random.classList.add('footer-buttons');
     const random_a = document.createElement('a');
+    random_a.href = 'random.html';
     const randomSpan = document.createElement('span');
     randomSpan.classList.add('material-icons');
     randomSpan.innerText = 'shuffle';
@@ -105,4 +118,21 @@ const footerSetup = () => {
     random_a.appendChild(randomSpan);
 };
 
-export { background, headerSetup, footerSetup };
+const profilePic = () => {
+    const container = document.getElementById('profilePicContainer');
+
+    const profiles = [wayneImg, katyImg, darylImg, danImg, shoresyImg, glenImg, gailImg, reillyJonesyImg, mcmurrayImg, coachImg, tanisImg, stewartImg];
+    profiles.forEach(profile => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('pic-border');
+
+        const img = new Image();
+        img.classList.add('profile-pic');
+        img.src = profile;
+
+        container.appendChild(imgContainer);
+        imgContainer.appendChild(img);
+    })
+};
+
+export { background, headerSetup, footerSetup, profilePic };
