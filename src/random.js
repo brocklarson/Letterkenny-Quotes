@@ -14,6 +14,7 @@ const buttonFunction = (() => {
     const quoters = document.getElementById('quoters');
     const copyBtn = document.getElementById('copyBtn');
     const setFavoriteBtn = document.getElementById('setFavoriteBtn');
+    const randQuote = document.getElementById('randQuote');
 
     //Events
     copyBtn.addEventListener('click', function() {
@@ -22,11 +23,10 @@ const buttonFunction = (() => {
     setFavoriteBtn.addEventListener('click', function() {
         quoteLib[getQuoteNum()].setFavorite();
     });
+    randQuote.addEventListener('click', setRandQuote)
 
     function setRandQuote() {
-        document.querySelector('h1').innerText = `Random Quote`
         const index = Math.floor(Math.random() * quoteLib.length);
-        console.log(index);
         quote.innerText = quoteLib[index].quote;
         quoters.innerText = quoteLib[index].quoter.join(', ');
     }
