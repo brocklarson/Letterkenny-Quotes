@@ -1,5 +1,7 @@
 import { background, headerSetup, footerSetup } from './pageSetup.js';
 import { quoteLib } from './quotes.js';
+import { updateLocalStorage } from './storage.js';
+
 
 (function pageInit() {
     background();
@@ -23,7 +25,6 @@ const buttonFunction = (() => {
 
     function setRandQuote() {
         const index = Math.floor(Math.random() * quoteLib.length);
-        console.log(index);
         quote.innerText = quoteLib[index].quote;
         quoters.innerText = quoteLib[index].quoter.join(', ');
     }
@@ -32,6 +33,8 @@ const buttonFunction = (() => {
     function setAsFavorite() {
         const index = quoteLib.findIndex(element => element.quote === quote.innerText);
         quoteLib[index].setFavorite();
+        updateLocalStorage('quoteLib', quoteLib)
+
     }
 
     function copyQuote() {

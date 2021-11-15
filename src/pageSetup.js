@@ -81,7 +81,7 @@ const footerSetup = () => {
     favorite.id = 'favoriteBtn';
     favorite.classList.add('footer-buttons');
     const favorite_a = document.createElement('a');
-    favorite_a.href = 'index.html';
+    favorite_a.href = 'favorite.html';
     const favoriteSpan = document.createElement('span');
     favoriteSpan.classList.add('material-icons');
     favoriteSpan.innerText = 'favorite';

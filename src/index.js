@@ -1,5 +1,6 @@
 import { background, headerSetup, footerSetup } from './pageSetup.js';
 import { quoteLib } from './quotes.js';
+import { updateLocalStorage } from './storage.js';
 
 (function pageInit() {
     background();
@@ -45,6 +46,7 @@ const buttonFunction = (() => {
 
     function setAsFavorite() {
         quoteLib[getQuoteNum()].setFavorite();
+        updateLocalStorage('quoteLib', quoteLib)
     }
 
     function copyQuote() {

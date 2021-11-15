@@ -450,7 +450,7 @@
             "favorite": false
         },
         {
-            "quote": "I flick more bean than a Starbucks barista",
+            "quote": "I flick more bean than a Starbucks barista.",
             "quoter": ["Gail"],
             "favorite": false
         },
@@ -1207,6 +1207,11 @@
         {
             "quote": "Your mom pulled the goalie on me and now she's preggo. Surprise, son. Go rake the fuckin' yard.",
             "quoter": ["Shoresy"],
+            "favorite": false
+        },
+        {
+            "quote": "Look at this tour de force. This pièce de résistance, this masterpi-ass.",
+            "quoter": ["Coach"],
             "favorite": false
         }
     ]
