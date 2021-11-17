@@ -6,7 +6,7 @@
 }
 
 :root {
-    --header-shadow: #7f4a20;
+    --accent-color: #5b1c01;
     --primary-text-color: black;
     --quote-font: 'cursive';
     --title-font: 'sans-serif';
@@ -103,7 +103,7 @@ header {
 
 .header-icon:hover span,
 .header-icon:focus span {
-    color: #5b1c01;
+    color: var(--accent-color);
     text-shadow: 0px 0px 10px #FFFFFF;
 }
 
@@ -147,7 +147,7 @@ footer {
 
 .footer-buttons:hover span,
 .footer-buttons:focus span {
-    color: #5b1c01;
+    color: var(--accent-color);
     text-shadow: 0px 0px 10px #FFF;
 }
 
@@ -231,7 +231,7 @@ footer {
 }
 
 .search-bar-icon {
-    color: #5b1c01;
+    color: var(--accent-color);
     font-size: 24px !important;
     margin-left: 8px;
     position: absolute;
@@ -240,7 +240,7 @@ footer {
 .search-bar {
     background: none;
     border-radius: 5px;
-    border: solid 1px #5b1c01;
+    border: solid 1px var(--accent-color);
     font-size: 1em;
     margin: 0;
     padding: 5px 5px 5px 40px;
@@ -248,7 +248,7 @@ footer {
 }
 
 .search-bar:focus {
-    box-shadow: 0 0 5px #5b1c01;
+    box-shadow: 0 0 5px var(--accent-color);
     outline: none;
 }
 
@@ -276,8 +276,8 @@ footer {
 .pic-border {
     align-items: center;
     border-radius: 50%;
-    border: solid 2px #5b1c01;
-    box-shadow: 0 0 8px #5b1c01;
+    border: solid 2px var(--accent-color);
+    box-shadow: 0 0 8px var(--accent-color);
     display: flex;
     height: 105px;
     justify-content: center;
@@ -309,9 +309,9 @@ footer {
 .random-main button {
     cursor: pointer;
     background: none;
-    box-shadow: 0 0 5px #5b1c01;
+    box-shadow: 0 0 5px var(--accent-color);
     outline: none;
-    border: solid 2px #5b1c01;
+    border: solid 2px var(--accent-color);
     border-radius: 100px;
     font-family: var(--title-font);
     font-size: 32px;
@@ -376,9 +376,18 @@ footer {
     width: max-content;
     position: absolute;
     right: 16px;
+    color: var(--accent-color);
     top: 16px;
     font-size: 24px !important;
     cursor: pointer;
+    color: var()
+}
+
+
+/* GENERAL CLASS */
+
+.hide {
+    display: none;
 }
 
 
