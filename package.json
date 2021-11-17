@@ -22,8 +22,14 @@
     },
     "homepage": "https://github.com/brocklarson/Letterkenny-Quotes#readme",
     "devDependencies": {
+        "css-loader": "^6.5.1",
+        "style-loader": "^3.3.1",
         "webpack": "^5.63.0",
         "webpack-cli": "^4.9.1",
         "webpack-dev-server": "^4.4.0"
+    },
+    "dependencies": {
+        "clipboard": "^2.0.8",
+        "tippy.js": "^6.3.7"
     }
 }

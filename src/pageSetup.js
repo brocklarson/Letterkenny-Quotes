@@ -12,6 +12,9 @@ import tanisImg from './images/tanis.png';
 import reillyJonesyImg from './images/reilly-jonesy.png';
 import shoresyImg from './images/shoresy.png';
 import stewartImg from './images/stewart.png';
+import * as ClipboardJS from 'clipboard';
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 const background = () => {
     const bgContainer = document.createElement('div');
@@ -54,8 +57,30 @@ const headerSetup = () => {
     copy.classList.add('copy-container', 'header-icon');
     const copySpan = document.createElement('span');
     copySpan.classList.add('material-icons-outlined');
-    copySpan.innerText = 'content_copy'
+    copySpan.innerText = 'content_copy';
 
+    (function setupClipboardJS() {
+        const clipboard = new ClipboardJS('.copy-container');
+        copy.setAttribute('data-clipboard-target', '#quote');
+
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+        });
+    })();
+
+    (function setupTooltip() {
+        tippy(copy, {
+            content: 'Quote Copied',
+            placement: 'bottom',
+            trigger: 'click',
+            hideOnClick: 'false',
+            onShow(instance) {
+                setTimeout(() => {
+                    instance.hide();
+                }, 1500);
+            }
+        });
+    })();
 
     header.appendChild(title);
     header.appendChild(favorite);

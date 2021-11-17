@@ -6,6 +6,7 @@ import { quoteLib } from './quotes.js';
     headerSetup();
     footerSetup();
     favoriteQuotes();
+    document.getElementById('setFavoriteBtn').classList.add('hide');
     document.getElementById('favoriteBtn').focus();
 
 })();

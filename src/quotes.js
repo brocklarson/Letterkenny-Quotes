@@ -30,5 +30,4 @@ function createLib() {
 }
 
 createLib();
-console.log(quoteLib);
 export { quoteLib }
