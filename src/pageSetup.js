@@ -45,12 +45,6 @@ const headerSetup = () => {
     const titleText = document.createElement('p');
     titleText.innerText = 'Letterkenny Quotes';
 
-    const favorite = document.createElement('div');
-    favorite.id = 'setFavoriteBtn';
-    favorite.classList.add('favorite-container', 'header-icon');
-    const favoriteSpan = document.createElement('span');
-    favoriteSpan.classList.add('material-icons-outlined');
-    favoriteSpan.innerText = 'favorite_border'
 
     const copy = document.createElement('div');
     copy.id = 'copyBtn';
@@ -59,34 +53,9 @@ const headerSetup = () => {
     copySpan.classList.add('material-icons-outlined');
     copySpan.innerText = 'content_copy';
 
-    (function setupClipboardJS() {
-        const clipboard = new ClipboardJS('.copy-container');
-        copy.setAttribute('data-clipboard-target', '#quote');
-
-        clipboard.on('success', function(e) {
-            e.clearSelection();
-        });
-    })();
-
-    (function setupTooltip() {
-        tippy(copy, {
-            content: 'Quote Copied',
-            placement: 'bottom',
-            trigger: 'click',
-            hideOnClick: 'false',
-            onShow(instance) {
-                setTimeout(() => {
-                    instance.hide();
-                }, 1500);
-            }
-        });
-    })();
-
     header.appendChild(title);
-    header.appendChild(favorite);
     header.appendChild(copy);
     title.appendChild(titleText);
-    favorite.appendChild(favoriteSpan);
     copy.appendChild(copySpan);
 };
 
@@ -143,6 +112,61 @@ const footerSetup = () => {
     random_a.appendChild(randomSpan);
 };
 
+const createCards = (quote, quoter) => {
+    const quoteCard = document.createElement('div');
+    quoteCard.classList.add('quote-card');
+
+    const cardQuote = document.createElement('p');
+    cardQuote.classList.add('card-quote');
+    cardQuote.innerText = quote;
+
+    const cardQuoters = document.createElement('p');
+    cardQuoters.classList.add('card-quoters');
+    cardQuoters.innerText = `- ${quoter.join(', ')}`;
+
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('card-icon-container');
+
+    const favoriteBtn = document.createElement('span');
+    favoriteBtn.classList.add('material-icons', 'card-heart');
+    favoriteBtn.innerText = 'favorite';
+
+    const copyBtn = document.createElement('span');
+    copyBtn.classList.add('material-icons-outlined', 'card-copy');
+    copyBtn.innerText = 'content_copy';
+
+    (function setupClipboardJS() {
+        const clipboard = new ClipboardJS('.copy-container');
+        copyBtn.setAttribute('data-clipboard-target', cardQuote.innerText); //Need to fix this
+
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+        });
+    })();
+
+    (function setupTooltip() {
+        tippy(copyBtn, {
+            content: 'Quote Copied',
+            placement: 'bottom',
+            trigger: 'click',
+            hideOnClick: 'false',
+            onShow(instance) {
+                setTimeout(() => {
+                    instance.hide();
+                }, 1500);
+            }
+        });
+    })();
+
+    quoteCard.appendChild(cardQuote);
+    quoteCard.appendChild(cardQuoters);
+    quoteCard.appendChild(iconContainer);
+    iconContainer.appendChild(favoriteBtn);
+    iconContainer.appendChild(copyBtn);
+
+    return quoteCard;
+}
+
 const profilePic = () => {
     const container = document.getElementById('profilePicContainer');
 
@@ -160,4 +184,5 @@ const profilePic = () => {
     })
 };
 
-export { background, headerSetup, footerSetup, profilePic };
+
+export { background, headerSetup, footerSetup, profilePic, createCards };
