@@ -9,7 +9,7 @@ import katyImg from './images/katy.png';
 import glenImg from './images/glen.png';
 import mcmurrayImg from './images/mcmurray.png';
 import tanisImg from './images/tanis.png';
-import reillyJonesyImg from './images/reilly-jonesy.png';
+import reillyJonesyImg from './images/reilly-jonesy.jpg';
 import shoresyImg from './images/shoresy.png';
 import stewartImg from './images/stewart.png';
 import * as ClipboardJS from 'clipboard';
