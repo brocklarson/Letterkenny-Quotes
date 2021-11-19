@@ -16,8 +16,9 @@ const buttonFunction = (() => {
         const main = document.querySelector('main')
         const index = getQuoteNum();
         const quote = quoteLib[index].quote;
-        const quoter = quoteLib[index].quoter
-        main.appendChild(createCards(quote, quoter));
+        const quoter = quoteLib[index].quoter;
+        const favorite = quoteLib[index].favorite;
+        main.appendChild(createCards(quote, quoter, favorite));
     })();
 
     function getQuoteNum() {

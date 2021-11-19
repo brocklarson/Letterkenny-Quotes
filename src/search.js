@@ -37,7 +37,7 @@ const buttonFunction = (() => {
     function findMatches(search) {
         quoteLib.filter(element => {
             if (element.quote.toLowerCase().includes(search) || element.quoter.some(el => el.toLowerCase().includes(search))) {
-                quotesContainer.appendChild(createCards(element.quote, element.quoter));
+                quotesContainer.appendChild(createCards(element.quote, element.quoter, element.favorite));
             }
         });
     }

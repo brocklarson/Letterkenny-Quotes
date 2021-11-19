@@ -24,9 +24,10 @@ const buttonFunction = (() => {
         const index = Math.floor(Math.random() * quoteLib.length);
         const quote = quoteLib[index].quote;
         const quoter = quoteLib[index].quoter;
+        const favorite = quoteLib[index].favorite;
 
         removeCard();
-        main.insertBefore(createCards(quote, quoter), main.firstChild);
+        main.insertBefore(createCards(quote, quoter, favorite), main.firstChild);
     }
     setRandQuote();
 
@@ -35,10 +36,4 @@ const buttonFunction = (() => {
         if (quoteCard) quoteCard.remove();
     }
 
-    function setAsFavorite() {
-        const index = quoteLib.findIndex(element => element.quote === quote.innerText);
-        quoteLib[index].setFavorite();
-        updateLocalStorage('quoteLib', quoteLib)
-
-    }
 })();

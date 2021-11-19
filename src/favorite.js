@@ -14,7 +14,7 @@ const main = document.querySelector('main');
 
 function favoriteQuotes() {
     quoteLib.filter(element => {
-        if (element.favorite === true) main.appendChild(createCards(element.quote, element.quoter));
+        if (element.favorite === true) main.appendChild(createCards(element.quote, element.quoter, true));
     })
 
 }

@@ -15,6 +15,9 @@ import stewartImg from './images/stewart.png';
 import * as ClipboardJS from 'clipboard';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
+import { updateLocalStorage } from './storage.js';
+import { quoteLib } from './quotes.js';
+
 
 const background = () => {
     const bgContainer = document.createElement('div');
@@ -46,17 +49,17 @@ const headerSetup = () => {
     titleText.innerText = 'Letterkenny Quotes';
 
 
-    const copy = document.createElement('div');
-    copy.id = 'copyBtn';
-    copy.classList.add('copy-container', 'header-icon');
-    const copySpan = document.createElement('span');
-    copySpan.classList.add('material-icons-outlined');
-    copySpan.innerText = 'content_copy';
+    const settings = document.createElement('div');
+    settings.id = 'settingsBtn';
+    settings.classList.add('header-icon');
+    const settingsSpan = document.createElement('span');
+    settingsSpan.classList.add('material-icons');
+    settingsSpan.innerText = 'settings';
 
     header.appendChild(title);
-    header.appendChild(copy);
+    header.appendChild(settings);
     title.appendChild(titleText);
-    copy.appendChild(copySpan);
+    settings.appendChild(settingsSpan);
 };
 
 const footerSetup = () => {
@@ -112,7 +115,8 @@ const footerSetup = () => {
     random_a.appendChild(randomSpan);
 };
 
-const createCards = (quote, quoter) => {
+const createCards = (quote, quoter, favorite = false) => {
+
     const quoteCard = document.createElement('div');
     quoteCard.classList.add('quote-card');
 
@@ -129,15 +133,26 @@ const createCards = (quote, quoter) => {
 
     const favoriteBtn = document.createElement('span');
     favoriteBtn.classList.add('material-icons', 'card-heart');
-    favoriteBtn.innerText = 'favorite';
+    if (favorite) favoriteBtn.innerText = 'favorite';
+    else favoriteBtn.innerText = 'favorite_border';
+    favoriteBtn.addEventListener('click', setAsFavorite);
 
     const copyBtn = document.createElement('span');
     copyBtn.classList.add('material-icons-outlined', 'card-copy');
     copyBtn.innerText = 'content_copy';
 
+    quoteCard.appendChild(cardQuote);
+    quoteCard.appendChild(cardQuoters);
+    quoteCard.appendChild(iconContainer);
+    iconContainer.appendChild(favoriteBtn);
+    iconContainer.appendChild(copyBtn);
+
     (function setupClipboardJS() {
-        const clipboard = new ClipboardJS('.copy-container');
-        copyBtn.setAttribute('data-clipboard-target', cardQuote.innerText); //Need to fix this
+        const clipboard = new ClipboardJS('.card-copy', {
+            target: function(trigger) {
+                return trigger.parentNode.parentNode.firstChild;
+            }
+        });
 
         clipboard.on('success', function(e) {
             e.clearSelection();
@@ -158,11 +173,17 @@ const createCards = (quote, quoter) => {
         });
     })();
 
-    quoteCard.appendChild(cardQuote);
-    quoteCard.appendChild(cardQuoters);
-    quoteCard.appendChild(iconContainer);
-    iconContainer.appendChild(favoriteBtn);
-    iconContainer.appendChild(copyBtn);
+    function setAsFavorite() {
+        const index = quoteLib.findIndex(element => element.quote === quote);
+        quoteLib[index].setFavorite();
+        updateFavoriteIcon(index);
+        updateLocalStorage('quoteLib', quoteLib);
+    }
+
+    function updateFavoriteIcon(index) {
+        if (quoteLib[index].favorite) favoriteBtn.innerText = 'favorite';
+        else favoriteBtn.innerText = 'favorite_border';
+    }
 
     return quoteCard;
 }

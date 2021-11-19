@@ -10,6 +10,11 @@
     --primary-text-color: black;
     --quote-font: 'cursive';
     --title-font: 'sans-serif';
+    --card-color: 248, 248, 255;
+    --card-font-color: black;
+    --card-font-size: 22px;
+    --card-icon-color: #5b1c01;
+    --card-opacity: 0.3;
 }
 
 body {
@@ -163,44 +168,46 @@ footer {
     padding: 32px 16px;
     position: relative;
     width: 100%;
-    scrollbar-width: none;
-    overflow-y: scroll;
-}
-
-.homepage-main::-webkit-scrollbar {
-    display: none;
 }
 
 .homepage-main h1 {
     border-radius: 100px;
     font-family: var(--title-font);
     font-size: 32px;
-    margin: 0 auto;
+    margin: 0 auto 16px auto;
     padding: 8px 8px;
     text-align: center;
     width: max-content;
 }
 
-.homepage-main div p {
-    font-size: 24px;
+.homepage-main .quote-card {
+    scrollbar-width: none;
+    overflow-y: scroll;
+    max-height: calc(100vh - 316px);
+    font-size: calc(var(--card-font-size) * 1.15);
+}
+
+.homepage-main .quote-card::-webkit-scrollbar {
+    display: none;
 }
 
 
 /* QUOTE CARDS */
 
 .quote-card {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(var(--card-color), var(--card-opacity));
     border-radius: 10px;
+    color: var(--card-font-color);
     display: grid;
-    grid-template-columns: 1fr 1fr;
     font-family: var(--quote-font);
-    font-size: 20px;
-    margin: 0px auto 16px auto;
+    font-size: var(--card-font-size);
+    grid-template-columns: 1fr 1fr;
     height: min-content;
-    width: 85%;
+    margin: 0px auto 16px auto;
     padding: 16px 12px;
     position: relative;
     row-gap: 16px;
+    width: 85%;
 }
 
 .card-quote {
@@ -215,22 +222,22 @@ footer {
 }
 
 .card-icon-container {
-    height: 100%;
-    width: 100%;
     grid-column: 1/2;
     grid-row: 2/3;
+    height: 100%;
+    width: 100%;
 }
 
 .card-heart,
 .card-copy {
-    display: inline;
     align-self: flex-end;
-    height: max-content;
-    width: max-content;
-    color: var(--accent-color);
-    font-size: 24px !important;
+    color: var(--card-icon-color);
     cursor: pointer;
+    display: inline;
+    font-size: calc(var(--card-font-size) * 1.15) !important;
+    height: max-content;
     margin-right: 20px;
+    width: max-content;
 }
 
 
