@@ -115,7 +115,13 @@ const footerSetup = () => {
     random_a.appendChild(randomSpan);
 };
 
-const createCards = (quote, quoter, favorite = false) => {
+const pageSetup = () => {
+    background();
+    headerSetup();
+    footerSetup();
+}
+
+const createCards = (quote, quotee, favorite = false) => {
 
     const quoteCard = document.createElement('div');
     quoteCard.classList.add('quote-card');
@@ -124,9 +130,9 @@ const createCards = (quote, quoter, favorite = false) => {
     cardQuote.classList.add('card-quote');
     cardQuote.innerText = quote;
 
-    const cardQuoters = document.createElement('p');
-    cardQuoters.classList.add('card-quoters');
-    cardQuoters.innerText = `- ${quoter.join(', ')}`;
+    const cardQuotees = document.createElement('p');
+    cardQuotees.classList.add('card-quotees');
+    cardQuotees.innerText = `- ${quotee.join(', ')}`;
 
     const iconContainer = document.createElement('div');
     iconContainer.classList.add('card-icon-container');
@@ -142,7 +148,7 @@ const createCards = (quote, quoter, favorite = false) => {
     copyBtn.innerText = 'content_copy';
 
     quoteCard.appendChild(cardQuote);
-    quoteCard.appendChild(cardQuoters);
+    quoteCard.appendChild(cardQuotees);
     quoteCard.appendChild(iconContainer);
     iconContainer.appendChild(favoriteBtn);
     iconContainer.appendChild(copyBtn);
@@ -191,19 +197,35 @@ const createCards = (quote, quoter, favorite = false) => {
 const profilePic = () => {
     const container = document.getElementById('profilePicContainer');
 
-    const profiles = [wayneImg, katyImg, darylImg, danImg, shoresyImg, glenImg, gailImg, reillyJonesyImg, mcmurrayImg, coachImg, tanisImg, stewartImg];
-    profiles.forEach(profile => {
+    const pictureSet = [
+        { source: wayneImg, name: 'wayne' },
+        { source: katyImg, name: 'katy' },
+        { source: darylImg, name: 'daryl' },
+        { source: danImg, name: 'dan' },
+        { source: shoresyImg, name: 'shoresy' },
+        { source: glenImg, name: 'glen' },
+        { source: gailImg, name: 'gail' },
+        { source: reillyJonesyImg, name: 'reillyJonesy' },
+        { source: mcmurrayImg, name: 'mcmurray' },
+        { source: coachImg, name: 'coach' },
+        { source: tanisImg, name: 'tanis' },
+        { source: stewartImg, name: 'stewart' }
+    ];
+
+    pictureSet.forEach(picture => {
         const imgContainer = document.createElement('div');
         imgContainer.classList.add('pic-border');
 
         const img = new Image();
         img.classList.add('profile-pic');
-        img.src = profile;
+        img.src = picture.source;
+        img.id = picture.name;
 
         container.appendChild(imgContainer);
         imgContainer.appendChild(img);
     })
+
 };
 
 
-export { background, headerSetup, footerSetup, profilePic, createCards };
+export { pageSetup, profilePic, createCards };

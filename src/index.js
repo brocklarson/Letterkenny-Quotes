@@ -1,25 +1,23 @@
-import { background, headerSetup, footerSetup, createCards } from './pageSetup.js';
+import { pageSetup, createCards } from './pageSetup.js';
 import { quoteLib } from './quotes.js';
-import { updateLocalStorage } from './storage.js';
 
-(function pageInit() {
-    background();
-    headerSetup();
-    footerSetup();
-    document.getElementById('homeBtn').focus();
-})();
+const homepage = (() => {
 
-const buttonFunction = (() => {
-    //Cache Dom
+    (function setupPage() {
+        pageSetup();
+        setQuoteOfDay();
+        document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+        document.getElementById('homeBtn').classList.add('active');
+    })();
 
-    (function setQuoteOfDay() {
+    function setQuoteOfDay() {
         const main = document.querySelector('main')
         const index = getQuoteNum();
         const quote = quoteLib[index].quote;
-        const quoter = quoteLib[index].quoter;
+        const quotee = quoteLib[index].quotee;
         const favorite = quoteLib[index].favorite;
-        main.appendChild(createCards(quote, quoter, favorite));
-    })();
+        main.appendChild(createCards(quote, quotee, favorite));
+    }
 
     function getQuoteNum() {
         const epoch = new Date(2000, 1, 1);

@@ -1,53 +1,90 @@
-import { background, headerSetup, footerSetup, profilePic, createCards } from './pageSetup.js';
+import { pageSetup, profilePic, createCards } from './pageSetup.js';
 import { quoteLib } from './quotes.js';
 
-(function pageInit() {
-    background();
-    headerSetup();
-    footerSetup();
-    profilePic();
-    document.getElementById('searchBtn').focus();
-})();
-
-const buttonFunction = (() => {
-    const searchBar = document.getElementById('searchBar');
-    const quotesContainer = document.getElementById('quotesContainer')
-
+const searchPage = (() => {
     let searchTimer;
-    searchBar.addEventListener('input', (e) => {
+
+    (function pageInit() {
+        pageSetup();
+        profilePic();
+        document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+        document.getElementById('searchBtn').classList.add('active');
+    })();
+
+
+    //Cache DOM
+    const searchBar = document.getElementById('searchBar');
+    const searchBarContainer = document.querySelector('.search-bar-container');
+    const quotesContainer = document.getElementById('quotesContainer');
+    const profilePics = document.querySelectorAll('.profile-pic');
+
+    searchBar.addEventListener('input', handleSearchbar);
+    profilePics.forEach(picture => picture.addEventListener('click', handlePicClick));
+
+    function handleSearchbar() {
         clearTimeout(searchTimer);
         searchTimer = setTimeout(() => {
-            searchQuotes();
+            searchBarSearch();
         }, 300);
-    });
+    }
 
-    function searchQuotes() {
-        const search = searchBar.value.toLowerCase();
+    function searchBarSearch() {
+        const searchText = searchBar.value.toLowerCase();
 
         removeCards();
-        if (search) {
+        if (searchText) {
             removePics();
-            findMatches(search);
+            matchingQuote(searchText);
+            matchingQuotee(searchText);
         } else {
             removeCards();
             addPics();
         }
     }
 
-    function findMatches(search) {
+    function handlePicClick(event) {
+        const id = event.target.id
+        if (id === 'reillyJonesy') {
+            pictureSearch('reilly');
+            pictureSearch('jonesy');
+        } else {
+            pictureSearch(id);
+        }
+    }
+
+    function pictureSearch(quotee) {
+        searchBarContainer.classList.add('hide');
+        removeCards();
+        removePics(quotee);
+        matchingQuotee(quotee);
+    }
+
+    function matchingQuote(search) {
         quoteLib.filter(element => {
-            if (element.quote.toLowerCase().includes(search) || element.quoter.some(el => el.toLowerCase().includes(search))) {
-                quotesContainer.appendChild(createCards(element.quote, element.quoter, element.favorite));
+            if (element.quote.toLowerCase().includes(search)) {
+                quotesContainer.appendChild(createCards(element.quote, element.quotee, element.favorite));
             }
         });
     }
 
-    function addPics() {
-        document.getElementById('profilePicContainer').classList.remove('hide');
+    function matchingQuotee(search) {
+        quoteLib.filter(element => {
+            if (element.quotee.some(el => el.toLowerCase().includes(search))) {
+                quotesContainer.appendChild(createCards(element.quote, element.quotee, element.favorite));
+            }
+        });
+
     }
 
-    function removePics() {
-        document.getElementById('profilePicContainer').classList.add('hide');
+    function addPics() {
+        profilePics.forEach(pic => pic.parentNode.classList.remove('hide'));
+
+    }
+
+    function removePics(exception = null) {
+        profilePics.forEach(pic => {
+            if (pic.id !== exception) pic.parentNode.classList.add('hide')
+        });
     }
 
     function removeCards() {

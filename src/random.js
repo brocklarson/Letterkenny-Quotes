@@ -1,19 +1,14 @@
-import { background, headerSetup, footerSetup, createCards } from './pageSetup.js';
+import { pageSetup, createCards } from './pageSetup.js';
 import { quoteLib } from './quotes.js';
-import { updateLocalStorage } from './storage.js';
 
+const randomPage = (() => {
+    (function pageInit() {
+        pageSetup();
+        document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+        document.getElementById('rndBtn').classList.add('active');
+    })();
 
-(function pageInit() {
-    background();
-    headerSetup();
-    footerSetup();
-    document.getElementById('rndBtn').focus();
-})();
-
-const buttonFunction = (() => {
     //Cache Dom
-    const quote = document.getElementById('quote');
-    const quoters = document.getElementById('quoters');
     const randQuote = document.getElementById('randQuote');
 
     //Events
@@ -23,11 +18,11 @@ const buttonFunction = (() => {
         const main = document.querySelector('main')
         const index = Math.floor(Math.random() * quoteLib.length);
         const quote = quoteLib[index].quote;
-        const quoter = quoteLib[index].quoter;
+        const quotee = quoteLib[index].quotee;
         const favorite = quoteLib[index].favorite;
 
         removeCard();
-        main.insertBefore(createCards(quote, quoter, favorite), main.firstChild);
+        main.insertBefore(createCards(quote, quotee, favorite), main.firstChild);
     }
     setRandQuote();
 

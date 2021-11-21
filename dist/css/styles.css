@@ -109,7 +109,6 @@ header {
 .header-icon:hover span,
 .header-icon:focus span {
     color: var(--accent-color);
-    text-shadow: 0px 0px 10px #FFFFFF;
 }
 
 
@@ -153,7 +152,6 @@ footer {
 .footer-buttons:hover span,
 .footer-buttons:focus span {
     color: var(--accent-color);
-    text-shadow: 0px 0px 10px #FFF;
 }
 
 
@@ -215,7 +213,7 @@ footer {
     grid-row: 1/2;
 }
 
-.card-quoters {
+.card-quotees {
     grid-column: 2/3;
     grid-row: 2/3;
     text-align: end;
@@ -263,12 +261,14 @@ footer {
     height: max-content;
     max-width: 600px;
     width: 100%;
+    position: relative;
 }
 
 .search-bar-icon {
     color: var(--accent-color);
     font-size: 24px !important;
     margin-left: 8px;
+    top: 4px;
     position: absolute;
 }
 
@@ -277,7 +277,7 @@ footer {
     border-radius: 5px;
     border: solid 1px var(--accent-color);
     font-size: 1em;
-    margin: 0;
+    margin: 0 0 32px 0;
     padding: 5px 5px 5px 40px;
     width: 100%;
 }
@@ -293,11 +293,9 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    margin: 32px 0 0 0;
     max-height: 100%;
     max-width: 600px;
     min-height: min-content;
-    padding: 8px;
     row-gap: 24px;
     scrollbar-width: none;
     overflow-y: scroll;
@@ -306,6 +304,18 @@ footer {
 
 .profile-pic-container::-webkit-scrollbar {
     display: none;
+}
+
+.pic-border:first-child,
+.pic-border:nth-child(2),
+.pic-border:nth-child(3) {
+    margin-top: 8px;
+}
+
+.pic-border:last-child,
+.pic-border:nth-last-child(2),
+.pic-border:nth-last-child(3) {
+    margin-bottom: 8px;
 }
 
 .pic-border {
@@ -408,6 +418,11 @@ footer {
 
 .hide {
     display: none;
+}
+
+.active span {
+    color: var(--accent-color);
+    text-shadow: 0px 0px 10px #FFFFFF;
 }
 
 

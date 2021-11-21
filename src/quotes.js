@@ -4,11 +4,11 @@ import { getLocalStorage } from './storage.js';
 class Quotes {
     constructor(
         quote = '',
-        quoter = [],
+        quotee = [],
         favorite = false
     ) {
         this.quote = quote
-        this.quoter = quoter
+        this.quotee = quotee
         this.favorite = favorite
     }
 
@@ -25,7 +25,7 @@ function createLib() {
         quoteList = getLocalStorage('quoteLib');
     }
     quoteList.forEach((item) => {
-        quoteLib.push(new Quotes(item.quote, item.quoter, item.favorite));
+        quoteLib.push(new Quotes(item.quote, item.quotee, item.favorite));
     })
 }
 
