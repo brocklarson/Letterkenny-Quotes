@@ -15,8 +15,8 @@ import stewartImg from './images/stewart.png';
 import * as ClipboardJS from 'clipboard';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
-import { updateLocalStorage } from './storage.js';
 import { quoteLib } from './quotes.js';
+import { events } from './pubsub.js';
 
 
 const background = () => {
@@ -183,7 +183,7 @@ const createCards = (quote, quotee, favorite = false) => {
         const index = quoteLib.findIndex(element => element.quote === quote);
         quoteLib[index].setFavorite();
         updateFavoriteIcon(index);
-        updateLocalStorage('quoteLib', quoteLib);
+        events.publish('updateFavorite', ['quoteLib', quoteLib]);
     }
 
     function updateFavoriteIcon(index) {

@@ -1,4 +1,9 @@
+import { events } from "./pubsub.js";
+
+events.subscribe('updateFavorite', function(data) { updateLocalStorage(data[0], data[1]) })
+
 function updateLocalStorage(name, data) {
+    console.log('here')
     if (_storageAvailable('localStorage')) {
         localStorage.setItem(name, JSON.stringify(data));
     }
