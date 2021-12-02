@@ -17,6 +17,7 @@ const searchPage = (() => {
     const searchBarContainer = document.querySelector('.search-bar-container');
     const quotesContainer = document.getElementById('quotesContainer');
     const profilePics = document.querySelectorAll('.profile-pic');
+    const backButton = document.getElementById('backButtonContainer');
 
     searchBar.addEventListener('input', handleSearchbar);
     profilePics.forEach(picture => picture.addEventListener('click', handlePicClick));
@@ -55,8 +56,9 @@ const searchPage = (() => {
     function pictureSearch(quotee) {
         searchBarContainer.classList.add('hide');
         removeCards();
-        removePics(quotee);
         matchingQuotee(quotee);
+        removePics();
+        addBackButton();
     }
 
     function matchingQuote(search) {
@@ -78,17 +80,31 @@ const searchPage = (() => {
 
     function addPics() {
         profilePics.forEach(pic => pic.parentNode.classList.remove('hide'));
-
     }
 
-    function removePics(exception = null) {
+    function removePics() {
         profilePics.forEach(pic => {
-            if (pic.id !== exception) pic.parentNode.classList.add('hide')
+            pic.parentNode.classList.add('hide')
         });
+
     }
 
     function removeCards() {
         const cards = document.querySelectorAll('.quote-card');
         cards.forEach(card => card.remove());
     }
+
+    function addBackButton() {
+        backButton.classList.remove('hide');
+        backButton.querySelector('span').addEventListener('click', returnHome);
+    }
+
+    function returnHome() {
+        backButton.classList.add('hide')
+        backButton.querySelector('span').removeEventListener('click', returnHome);
+        removeCards();
+        addPics();
+        searchBarContainer.classList.remove('hide');
+    }
+
 })();
