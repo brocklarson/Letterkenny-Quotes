@@ -240,7 +240,8 @@ footer {
 }
 
 .card-heart,
-.card-copy {
+.card-copy,
+.card-share {
     align-self: flex-end;
     color: var(--card-icon-color);
     cursor: pointer;
