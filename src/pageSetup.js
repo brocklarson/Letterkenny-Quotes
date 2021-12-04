@@ -145,7 +145,7 @@ const createCards = (quote, quotee, favorite = false) => {
 
     const copyBtn = document.createElement('span');
     copyBtn.classList.add('material-icons-outlined', 'card-copy');
-    copyBtn.innerText = 'content_copy';
+    copyBtn.innerText = 'share';
 
     quoteCard.appendChild(cardQuote);
     quoteCard.appendChild(cardQuotees);
@@ -153,17 +153,25 @@ const createCards = (quote, quotee, favorite = false) => {
     iconContainer.appendChild(favoriteBtn);
     iconContainer.appendChild(copyBtn);
 
-    (function setupClipboardJS() {
-        const clipboard = new ClipboardJS('.card-copy', {
-            target: function(trigger) {
-                return trigger.parentNode.parentNode.firstChild;
-            }
-        });
+    copyBtn.addEventListener('click', async() => {
+        try {
+            await navigator.share(quote)
+        } catch (err) {
+            window.alert('Error: ' + err);
+        }
+    });
 
-        clipboard.on('success', function(e) {
-            e.clearSelection();
-        });
-    })();
+    // (function setupClipboardJS() {
+    //     const clipboard = new ClipboardJS('.card-copy', {
+    //         target: function(trigger) {
+    //             return trigger.parentNode.parentNode.firstChild;
+    //         }
+    //     });
+
+    //     clipboard.on('success', function(e) {
+    //         e.clearSelection();
+    //     });
+    // })();
 
     (function setupTooltip() {
         tippy(copyBtn, {
