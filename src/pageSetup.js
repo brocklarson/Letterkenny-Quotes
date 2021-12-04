@@ -145,7 +145,7 @@ const createCards = (quote, quotee, favorite = false) => {
 
     const copyBtn = document.createElement('span');
     copyBtn.classList.add('material-icons-outlined', 'card-copy');
-    copyBtn.innerText = 'share';
+    copyBtn.innerText = 'content_copy';
 
     quoteCard.appendChild(cardQuote);
     quoteCard.appendChild(cardQuotees);
@@ -153,31 +153,17 @@ const createCards = (quote, quotee, favorite = false) => {
     iconContainer.appendChild(favoriteBtn);
     iconContainer.appendChild(copyBtn);
 
-    const shareData = {
-        title: 'test',
-        text: 'test text',
-        url: 'google.com'
-    }
+    (function setupClipboardJS() {
+        const clipboard = new ClipboardJS('.card-copy', {
+            target: function(trigger) {
+                return trigger.parentNode.parentNode.firstChild;
+            }
+        });
 
-    copyBtn.addEventListener('click', async() => {
-        try {
-            await navigator.share(shareData)
-        } catch (err) {
-            window.alert('Error: ' + err);
-        }
-    });
-
-    // (function setupClipboardJS() {
-    //     const clipboard = new ClipboardJS('.card-copy', {
-    //         target: function(trigger) {
-    //             return trigger.parentNode.parentNode.firstChild;
-    //         }
-    //     });
-
-    //     clipboard.on('success', function(e) {
-    //         e.clearSelection();
-    //     });
-    // })();
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+        });
+    })();
 
     (function setupTooltip() {
         tippy(copyBtn, {
@@ -192,6 +178,26 @@ const createCards = (quote, quotee, favorite = false) => {
             }
         });
     })();
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        const shareBtn = document.createElement('span');
+        shareBtn.classList.add('material-icons-outlined', 'card-share');
+        shareBtn.innerText = 'share';
+        iconContainer.appendChild(shareBtn);
+
+        const shareData = {
+            text: `"${quote}" -${quotee.join(', ')}`,
+            url: 'https://brocklarson.github.io/Letterkenny-Quotes/'
+        }
+
+        shareBtn.addEventListener('click', async() => {
+            try {
+                await navigator.share(shareData)
+            } catch (err) {
+                window.alert('Could not share using this device. Make sure you are using a mobile device with permissions to share!\n\nError: ' + err);
+            }
+        });
+    }
 
     function setAsFavorite() {
         const index = quoteLib.findIndex(element => element.quote === quote);
