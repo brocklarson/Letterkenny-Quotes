@@ -153,9 +153,15 @@ const createCards = (quote, quotee, favorite = false) => {
     iconContainer.appendChild(favoriteBtn);
     iconContainer.appendChild(copyBtn);
 
+    const shareData = {
+        title: 'test',
+        text: 'test text',
+        url: 'google.com'
+    }
+
     copyBtn.addEventListener('click', async() => {
         try {
-            await navigator.share(quote)
+            await navigator.share(shareData)
         } catch (err) {
             window.alert('Error: ' + err);
         }
