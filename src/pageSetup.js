@@ -186,7 +186,7 @@ const createCards = (quote, quotee, favorite = false) => {
         iconContainer.appendChild(shareBtn);
 
         const shareData = {
-            text: `"${quote}" -${quotee.join(', ')}`,
+            text: `"${quote}" -${quotee.join(', ')}, Letterkenny\n\n`,
             url: 'https://brocklarson.github.io/Letterkenny-Quotes/'
         }
 
