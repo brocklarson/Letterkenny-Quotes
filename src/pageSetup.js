@@ -18,6 +18,22 @@ import 'tippy.js/dist/tippy.css';
 import { quoteLib } from './quotes.js';
 import { events } from './pubsub.js';
 
+const pageInit = () => {
+    preloader();
+    background();
+    headerSetup();
+    footerSetup();
+}
+
+const preloader = () => {
+    const preloader = document.createElement('div');
+    preloader.classList.add('preloader');
+    document.body.appendChild(preloader);
+
+    window.onload = function() {
+        preloader.classList.add('hide');
+    }
+}
 
 const background = () => {
     const bgContainer = document.createElement('div');
@@ -68,8 +84,6 @@ const footerSetup = () => {
     const home = document.createElement('button');
     home.id = 'homeBtn';
     home.classList.add('footer-buttons');
-    const home_a = document.createElement('a');
-    home_a.href = "index.html";
     const homeSpan = document.createElement('span');
     homeSpan.classList.add('material-icons');
     homeSpan.innerText = 'wb_sunny';
@@ -77,8 +91,6 @@ const footerSetup = () => {
     const favorite = document.createElement('button');
     favorite.id = 'favoriteBtn';
     favorite.classList.add('footer-buttons');
-    const favorite_a = document.createElement('a');
-    favorite_a.href = 'favorite.html';
     const favoriteSpan = document.createElement('span');
     favoriteSpan.classList.add('material-icons');
     favoriteSpan.innerText = 'favorite';
@@ -86,8 +98,6 @@ const footerSetup = () => {
     const search = document.createElement('button');
     search.id = 'searchBtn';
     search.classList.add('footer-buttons');
-    const search_a = document.createElement('a');
-    search_a.href = 'search.html';
     const searchSpan = document.createElement('span');
     searchSpan.classList.add('material-icons');
     searchSpan.innerText = 'search';
@@ -95,8 +105,6 @@ const footerSetup = () => {
     const random = document.createElement('button');
     random.id = 'rndBtn';
     random.classList.add('footer-buttons');
-    const random_a = document.createElement('a');
-    random_a.href = 'random.html';
     const randomSpan = document.createElement('span');
     randomSpan.classList.add('material-icons');
     randomSpan.innerText = 'shuffle';
@@ -105,20 +113,103 @@ const footerSetup = () => {
     footer.appendChild(favorite);
     footer.appendChild(search);
     footer.appendChild(random);
-    home.appendChild(home_a)
-    home_a.appendChild(homeSpan);
-    favorite.appendChild(favorite_a);
-    favorite_a.appendChild(favoriteSpan);
-    search.appendChild(search_a);
-    search_a.appendChild(searchSpan)
-    random.appendChild(random_a);
-    random_a.appendChild(randomSpan);
+    home.appendChild(homeSpan);
+    favorite.appendChild(favoriteSpan);
+    search.appendChild(searchSpan)
+    random.appendChild(randomSpan);
 };
 
-const pageSetup = () => {
-    background();
-    headerSetup();
-    footerSetup();
+const createDOM = (page = 'homepage') => {
+    resetActiveClass();
+    determineDOM();
+
+    function resetActiveClass() {
+        document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+    }
+
+    function determineDOM() {
+        if (page === 'favorites') favoritesDOM();
+        else if (page === 'random') randomDOM();
+        else if (page === 'search') searchDOM();
+        else homepageDOM();
+    }
+
+    function homepageDOM() {
+        const main = document.createElement('main');
+        main.classList.add('homepage-main');
+
+        const title = document.createElement('h1');
+        title.innerText = `Quote of the Day!`;
+
+        document.body.appendChild(main);
+        main.appendChild(title);
+        document.getElementById('homeBtn').classList.add('active');
+    }
+
+    function favoritesDOM() {
+        const main = document.createElement('main');
+        main.classList.add('favorite-main');
+        document.body.appendChild(main);
+        document.getElementById('favoriteBtn').classList.add('active');
+    }
+
+    function randomDOM() {
+        const main = document.createElement('main');
+        main.classList.add('random-main');
+
+        const btn = document.createElement('button');
+        btn.id = `randQuote`;
+        btn.innerText = `Random Quote`;
+
+        document.body.appendChild(main);
+        main.appendChild(btn);
+        document.getElementById('rndBtn').classList.add('active');
+    }
+
+    function searchDOM() {
+        const main = document.createElement('main');
+        main.classList.add('search-main');
+
+        const searchBarContainer = document.createElement('div');
+        searchBarContainer.classList.add('search-bar-container');
+
+        const searchIcon = document.createElement('span');
+        searchIcon.classList.add('material-icons-outlined', 'search-bar-icon');
+        searchIcon.innerText = `search`;
+
+        const searchBar = document.createElement('input');
+        searchBar.classList.add('search-bar');
+        searchBar.id = `searchBar`;
+        searchBar.setAttribute('type', 'text');
+        searchBar.setAttribute('placeHolder', 'Search Quote or Quotee');
+        searchBar.setAttribute('autocomplete', 'off');
+
+        const backBtn = document.createElement('div');
+        backBtn.id = `backButtonContainer`;
+        backBtn.classList.add('back-button-container', 'material-icons-outlined', 'hide');
+
+        const backIcon = document.createElement('span');
+        backIcon.innerText = `arrow_back_ios`;
+
+        const picContainer = document.createElement('div');
+        picContainer.id = `profilePicContainer`;
+        picContainer.classList.add('profile-pic-container');
+
+        const quotesContainer = document.createElement('div');
+        quotesContainer.id = `quotesContainer`;
+        quotesContainer.classList.add('quotes-container');
+
+        document.body.appendChild(main);
+        main.appendChild(searchBarContainer);
+        searchBarContainer.appendChild(searchIcon);
+        searchBarContainer.appendChild(searchBar);
+        main.appendChild(backBtn);
+        backBtn.appendChild(backIcon);
+        main.appendChild(picContainer);
+        main.appendChild(quotesContainer);
+        document.getElementById('searchBtn').classList.add('active');
+    }
+
 }
 
 const createCards = (quote, quotee, favorite = false) => {
@@ -244,8 +335,7 @@ const profilePic = () => {
         container.appendChild(imgContainer);
         imgContainer.appendChild(img);
     })
-
 };
 
 
-export { pageSetup, profilePic, createCards };
+export { pageInit, profilePic, createCards, createDOM };

@@ -4,9 +4,6 @@ module.exports = {
     mode: 'development',
     entry: {
         index: './src/index.js',
-        search: './src/search.js',
-        random: './src/random.js',
-        favorite: './src/favorite.js'
     },
     devtool: 'inline-source-map',
     devServer: {
