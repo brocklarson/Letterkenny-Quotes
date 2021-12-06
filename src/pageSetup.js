@@ -26,9 +26,13 @@ const pageInit = () => {
 }
 
 const preloader = () => {
-    const preloader = document.createElement('div');
-    preloader.classList.add('preloader');
-    document.body.appendChild(preloader);
+    const preloader = document.querySelector('.preloader');
+
+    const img = new Image();
+    img.classList.add('preloader-img');
+    img.src = bgLogo;
+
+    preloader.appendChild(img);
 
     window.onload = function() {
         preloader.classList.add('hide');
