@@ -29,8 +29,56 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: green;
+    background-color: whitesmoke;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloader img {
+    filter: invert(8%) sepia(55%) saturate(5142%) hue-rotate(14deg) brightness(35%) contrast(99%);
+    height: auto;
+    max-width: 50%;
+    position: absolute;
+    opacity: 0.75;
+    animation: spin 1000ms linear infinite;
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    25% {
+        -moz-transform: rotate(360deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    25% {
+        -webkit-transform: rotate(360deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
