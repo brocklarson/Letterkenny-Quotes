@@ -21,6 +21,7 @@
 body {
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 .preloader {
@@ -163,6 +164,7 @@ header {
 .header-icon span {
     color: var(--primary-text-color);
     font-size: 30px !important;
+    transition-duration: 300ms;
 }
 
 .header-icon:hover span,
@@ -482,6 +484,92 @@ footer {
 
 .favorite-main::-webkit-scrollbar {
     display: none;
+}
+
+
+/* SETTINGS MODAL */
+
+.settings-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.settings-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: calc(100vh - 200px);
+    max-width: 1080px;
+    border-radius: 10px;
+    border: solid 1px black;
+    background-color: #d1af8d;
+    z-index: 1;
+    font-family: var(--title-font);
+    padding: 16px;
+}
+
+.settings-modal p {
+    font-size: 20px;
+    margin: 24px 0 12px 0;
+    display: inline;
+}
+
+.settings-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    transition-duration: 300ms;
+    font-size: 28px !important;
+}
+
+.settings-close:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+.settings-modal h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 42px;
+}
+
+.settings-modal {
+    font-size: 20px;
+}
+
+.opacity-carousel,
+.fontSize-carousel,
+.fontColor-carousel,
+.iconColor-carousel {
+    height: max-content;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.opacity-carousel li {
+    padding: 8px 0;
+    border-radius: 10px;
+}
+
+.defaults-btn {
+    border: solid 1px black;
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin: 16px 0;
+    display: block;
+    width: max-content;
+}
+
+.settings-modal a {
+    display: block;
+    margin: 16px 0;
 }
 
 
