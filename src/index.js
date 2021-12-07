@@ -43,6 +43,11 @@ const favoritesPage = () => {
     }
 
     function updateFavorite() {
+        //Check if on the favorites page
+        //Subscribed event could call this when liking a quote
+        const main = document.querySelector('main');
+        if (!main.classList.contains('favorite-main')) return;
+
         removeCards();
         favoriteQuotes();
     }
@@ -193,14 +198,43 @@ const searchPage = () => {
 
 };
 
-const setupPage = (() => {
-    pageInit();
-    homepage();
+const settings = () => {
+    (function init() {
+        createDOM('settings');
+    })();
 
+    //Cache DOM
+    const modalBackdrop = document.querySelector('.settings-modal-backdrop');
+    const settingsModal = document.querySelector('.settings-modal');
+    const closeBtn = document.querySelector('.settings-close');
+
+
+    //Events
+    modalBackdrop.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    function closeModal() {
+        settingsModal.remove();
+        modalBackdrop.remove();
+    }
+}
+
+const setupPage = (() => {
+    (function init() {
+        pageInit();
+        homepage();
+        settings();
+    })();
+
+    //Cache DOM
     const footerBtns = document.querySelectorAll('.footer-buttons');
+    const settingsBtn = document.getElementById('settingsBtn');
+
+    //Events
     footerBtns.forEach(btn => {
         btn.addEventListener('click', changePage);
     });
+    settingsBtn.addEventListener('click', () => { settings() });
 
     function changePage(event) {
         const clickedBtn = event.currentTarget.id;

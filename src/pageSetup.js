@@ -68,7 +68,6 @@ const headerSetup = () => {
     const titleText = document.createElement('p');
     titleText.innerText = 'Letterkenny Quotes';
 
-
     const settings = document.createElement('div');
     settings.id = 'settingsBtn';
     settings.classList.add('header-icon');
@@ -135,6 +134,7 @@ const createDOM = (page = 'homepage') => {
         if (page === 'favorites') favoritesDOM();
         else if (page === 'random') randomDOM();
         else if (page === 'search') searchDOM();
+        else if (page === 'settings') settingsModal();
         else homepageDOM();
     }
 
@@ -212,6 +212,165 @@ const createDOM = (page = 'homepage') => {
         main.appendChild(picContainer);
         main.appendChild(quotesContainer);
         document.getElementById('searchBtn').classList.add('active');
+    }
+
+    function settingsModal() {
+        const modal = document.createElement('div');
+        modal.classList.add('settings-modal');
+
+        const modalBackdrop = document.createElement('div');
+        modalBackdrop.classList.add('settings-modal-backdrop');
+
+        const closeBtn = document.createElement('span');
+        closeBtn.classList.add('material-icons-outlined', 'settings-close');
+        closeBtn.innerText = 'close';
+
+        const title = document.createElement('h1');
+        title.innerText = 'Settings';
+
+        const cardOpacityText = document.createElement('p');
+        cardOpacityText.innerText = 'Quote Card Opacity:';
+        const opacityCarousel = document.createElement('ul');
+        opacityCarousel.classList.add('opacity-carousel');
+        const opacityOption1 = document.createElement('li');
+        opacityOption1.innerText = 'Less';
+        opacityOption1.setAttribute('style', 'background-color: rgba(var(--card-color),0.1);');
+        const opacityOption2 = document.createElement('li');
+        opacityOption2.innerText = 'Default';
+        opacityOption2.setAttribute('style', 'background-color: rgba(var(--card-color),0.3);');
+        const opacityOption3 = document.createElement('li');
+        opacityOption3.innerText = 'More';
+        opacityOption3.setAttribute('style', 'background-color: rgba(var(--card-color),0.6);');
+        const opacityOption4 = document.createElement('li');
+        opacityOption4.innerText = 'Most';
+        opacityOption4.setAttribute('style', 'background-color: rgba(var(--card-color),0.9);');
+
+        const fontSizeText = document.createElement('p');
+        fontSizeText.innerText = 'Quote Font Size:';
+        const fontSizeCarousel = document.createElement('ul');
+        fontSizeCarousel.classList.add('fontSize-carousel');
+        const fontSizeOption1 = document.createElement('li');
+        fontSizeOption1.innerText = 'Small';
+        fontSizeOption1.setAttribute('style', 'font-size: 20px;');
+        const fontSizeOption2 = document.createElement('li');
+        fontSizeOption2.innerText = 'Default';
+        fontSizeOption2.setAttribute('style', 'font-size: 26px;');
+        const fontSizeOption3 = document.createElement('li');
+        fontSizeOption3.innerText = 'Large';
+        fontSizeOption3.setAttribute('style', 'font-size: 32px;');
+        const fontSizeOption4 = document.createElement('li');
+        fontSizeOption4.innerText = 'Largest';
+        fontSizeOption4.setAttribute('style', 'font-size: 40px;');
+
+        const fontColorText = document.createElement('p');
+        fontColorText.innerText = 'Quote Font Color:';
+        const fontColorCarousel = document.createElement('ul');
+        fontColorCarousel.classList.add('fontColor-carousel');
+        const fontColorOption1 = document.createElement('li');
+        fontColorOption1.innerText = 'Black';
+        fontColorOption1.setAttribute('style', 'color: black;');
+        const fontColorOption2 = document.createElement('li');
+        fontColorOption2.innerText = 'White';
+        fontColorOption2.setAttribute('style', 'color: whitesmoke;');
+        const fontColorOption3 = document.createElement('li');
+        fontColorOption3.innerText = 'Red';
+        fontColorOption3.setAttribute('style', 'color: red;');
+        const fontColorOption4 = document.createElement('li');
+        fontColorOption4.innerText = 'Blue';
+        fontColorOption4.setAttribute('style', 'color: blue;');
+        const fontColorOption5 = document.createElement('li');
+        fontColorOption5.innerText = 'Green';
+        fontColorOption5.setAttribute('style', 'color: green;');
+        const fontColorOption6 = document.createElement('li');
+        fontColorOption6.innerText = 'Brown';
+        fontColorOption6.setAttribute('style', 'color: #5b1c01;');
+
+        const iconColorText = document.createElement('p');
+        iconColorText.innerText = 'Card Icon Color:';
+        const iconColorCarousel = document.createElement('ul');
+        iconColorCarousel.classList.add('iconColor-carousel');
+        const iconColorOption1 = document.createElement('li');
+        iconColorOption1.innerText = 'Black';
+        iconColorOption1.setAttribute('style', 'color: black;');
+        const iconColorOption2 = document.createElement('li');
+        iconColorOption2.innerText = 'White';
+        iconColorOption2.setAttribute('style', 'color: whitesmoke;');
+        const iconColorOption3 = document.createElement('li');
+        iconColorOption3.innerText = 'Red';
+        iconColorOption3.setAttribute('style', 'color: red;');
+        const iconColorOption4 = document.createElement('li');
+        iconColorOption4.innerText = 'Blue';
+        iconColorOption4.setAttribute('style', 'color: blue;');
+        const iconColorOption5 = document.createElement('li');
+        iconColorOption5.innerText = 'Green';
+        iconColorOption5.setAttribute('style', 'color: green;');
+        const iconColorOption6 = document.createElement('li');
+        iconColorOption6.innerText = 'Brown';
+        iconColorOption6.setAttribute('style', 'color: #5b1c01;');
+
+        const defaultsBtn = document.createElement('btn');
+        defaultsBtn.classList.add('defaults-btn');
+        defaultsBtn.innerText = 'Restore Defaults';
+
+        const suggestion = document.createElement('a');
+        suggestion.innerText = 'Suggest a quote or a correction';
+        suggestion.href = 'http://www.google.com/';
+
+        document.body.appendChild(modalBackdrop);
+        document.body.appendChild(modal);
+        modal.appendChild(closeBtn);
+        modal.appendChild(title);
+        modal.appendChild(cardOpacityText);
+        modal.appendChild(opacityCarousel);
+        opacityCarousel.appendChild(opacityOption1);
+        opacityCarousel.appendChild(opacityOption2);
+        opacityCarousel.appendChild(opacityOption3);
+        opacityCarousel.appendChild(opacityOption4);
+        modal.appendChild(fontSizeText);
+        modal.appendChild(fontSizeCarousel);
+        fontSizeCarousel.appendChild(fontSizeOption1);
+        fontSizeCarousel.appendChild(fontSizeOption2);
+        fontSizeCarousel.appendChild(fontSizeOption3);
+        fontSizeCarousel.appendChild(fontSizeOption4);
+        modal.appendChild(fontColorText);
+        modal.appendChild(fontColorCarousel);
+        fontColorCarousel.appendChild(fontColorOption1);
+        fontColorCarousel.appendChild(fontColorOption2);
+        fontColorCarousel.appendChild(fontColorOption3);
+        fontColorCarousel.appendChild(fontColorOption4);
+        fontColorCarousel.appendChild(fontColorOption5);
+        fontColorCarousel.appendChild(fontColorOption6);
+        modal.appendChild(iconColorText);
+        modal.appendChild(iconColorCarousel);
+        iconColorCarousel.appendChild(iconColorOption1);
+        iconColorCarousel.appendChild(iconColorOption2);
+        iconColorCarousel.appendChild(iconColorOption3);
+        iconColorCarousel.appendChild(iconColorOption4);
+        iconColorCarousel.appendChild(iconColorOption5);
+        iconColorCarousel.appendChild(iconColorOption6);
+        modal.appendChild(defaultsBtn);
+        modal.appendChild(suggestion);
+
+        (function setupCarousel() {
+            $(document).ready(function() {
+                $('.opacity-carousel').slick({
+                    infinite: false,
+                    initialSlide: 1,
+                });
+                $('.fontSize-carousel').slick({
+                    infinite: false,
+                    initialSlide: 1,
+                });
+                $('.fontColor-carousel').slick({
+                    infinite: false,
+                    initialSlide: 0,
+                });
+                $('.iconColor-carousel').slick({
+                    infinite: false,
+                    initialSlide: 5,
+                });
+            });
+        })();
     }
 
 }
