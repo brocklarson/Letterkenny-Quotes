@@ -201,21 +201,95 @@ const searchPage = () => {
 const settings = () => {
     (function init() {
         createDOM('settings');
+        setupCarousel();
     })();
 
     //Cache DOM
     const modalBackdrop = document.querySelector('.settings-modal-backdrop');
     const settingsModal = document.querySelector('.settings-modal');
     const closeBtn = document.querySelector('.settings-close');
-
+    const defaultsBtn = document.querySelector('.defaults-btn');
 
     //Events
     modalBackdrop.addEventListener('click', closeModal);
     closeBtn.addEventListener('click', closeModal);
+    defaultsBtn.addEventListener('click', resetDefaults)
 
     function closeModal() {
         settingsModal.remove();
         modalBackdrop.remove();
+    }
+
+    function setupCarousel() {
+        $(document).ready(function() {
+            const r = document.querySelector(':root');
+            $('.opacity-carousel').slick({
+                    infinite: false,
+                    initialSlide: 1,
+                })
+                .on('afterChange', function(event, slick, currentSlide) {
+                    const slide = window.getComputedStyle($('.opacity-carousel li')[currentSlide])
+                    const bgColor = slide.getPropertyValue('background-color');
+                    const alpha = bgColor.replace(/^.*,(.+)\)/, '$1');
+                    r.style.setProperty('--card-opacity', alpha);
+                });
+            $('.fontSize-carousel').slick({
+                    infinite: false,
+                    initialSlide: 1,
+                })
+                .on('afterChange', function(event, slick, currentSlide) {
+                    const slide = window.getComputedStyle($('.fontSize-carousel li')[currentSlide])
+                    const fontSize = slide.getPropertyValue('font-size')
+                    r.style.setProperty('--card-font-size', fontSize);
+                });
+            $('.fontColor-carousel').slick({
+                    infinite: false,
+                    initialSlide: 0,
+                })
+                .on('afterChange', function(event, slick, currentSlide) {
+                    const slide = window.getComputedStyle($('.fontColor-carousel li')[currentSlide])
+                    const color = slide.getPropertyValue('color')
+                    r.style.setProperty('--card-font-color', color);
+                });
+            $('.iconColor-carousel').slick({
+                    infinite: false,
+                    initialSlide: 5,
+                })
+                .on('afterChange', function(event, slick, currentSlide) {
+                    const slide = window.getComputedStyle($('.iconColor-carousel li')[currentSlide])
+                    const color = slide.getPropertyValue('color')
+                    r.style.setProperty('--card-icon-color', color);
+                });
+        });
+    };
+
+    function destroyCarousel() {
+        if ($('.opacity-carousel').hasClass('slick-initialized')) {
+            $('.opacity-carousel').slick('destroy');
+        }
+        if ($('.fontSize-carousel').hasClass('slick-initialized')) {
+            $('.fontSize-carousel').slick('destroy');
+        }
+        if ($('.fontColor-carousel').hasClass('slick-initialized')) {
+            $('.fontColor-carousel').slick('destroy');
+        }
+        if ($('.iconColor-carousel').hasClass('slick-initialized')) {
+            $('.iconColor-carousel').slick('destroy');
+        }
+    }
+
+    function resetDefaults() {
+        resetCSSVariables()
+        destroyCarousel()
+        setupCarousel();
+    }
+
+    function resetCSSVariables() {
+        const r = document.querySelector(':root');
+        r.style.setProperty('--card-opacity', '0.3');
+        r.style.setProperty('--card-font-size', '26px');
+        r.style.setProperty('--card-font-color', 'black');
+        r.style.setProperty('--card-icon-color', '#5b1c01');
     }
 }
 
@@ -223,7 +297,6 @@ const setupPage = (() => {
     (function init() {
         pageInit();
         homepage();
-        settings();
     })();
 
     //Cache DOM

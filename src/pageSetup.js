@@ -123,8 +123,10 @@ const footerSetup = () => {
 };
 
 const createDOM = (page = 'homepage') => {
-    resetActiveClass();
-    determineDOM();
+    (function init() {
+        resetActiveClass();
+        determineDOM();
+    })();
 
     function resetActiveClass() {
         document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
@@ -225,9 +227,6 @@ const createDOM = (page = 'homepage') => {
         closeBtn.classList.add('material-icons-outlined', 'settings-close');
         closeBtn.innerText = 'close';
 
-        const title = document.createElement('h1');
-        title.innerText = 'Settings';
-
         const cardOpacityText = document.createElement('p');
         cardOpacityText.innerText = 'Quote Card Opacity:';
         const opacityCarousel = document.createElement('ul');
@@ -286,7 +285,7 @@ const createDOM = (page = 'homepage') => {
         fontColorOption6.setAttribute('style', 'color: #5b1c01;');
 
         const iconColorText = document.createElement('p');
-        iconColorText.innerText = 'Card Icon Color:';
+        iconColorText.innerText = 'Quote Card Icon Color:';
         const iconColorCarousel = document.createElement('ul');
         iconColorCarousel.classList.add('iconColor-carousel');
         const iconColorOption1 = document.createElement('li');
@@ -314,12 +313,12 @@ const createDOM = (page = 'homepage') => {
 
         const suggestion = document.createElement('a');
         suggestion.innerText = 'Suggest a quote or a correction';
-        suggestion.href = 'http://www.google.com/';
+        suggestion.href = 'https://forms.gle/P39TXYQiaRqe6W269';
+        suggestion.setAttribute('target', '_blank');
 
         document.body.appendChild(modalBackdrop);
         document.body.appendChild(modal);
         modal.appendChild(closeBtn);
-        modal.appendChild(title);
         modal.appendChild(cardOpacityText);
         modal.appendChild(opacityCarousel);
         opacityCarousel.appendChild(opacityOption1);
@@ -350,29 +349,7 @@ const createDOM = (page = 'homepage') => {
         iconColorCarousel.appendChild(iconColorOption6);
         modal.appendChild(defaultsBtn);
         modal.appendChild(suggestion);
-
-        (function setupCarousel() {
-            $(document).ready(function() {
-                $('.opacity-carousel').slick({
-                    infinite: false,
-                    initialSlide: 1,
-                });
-                $('.fontSize-carousel').slick({
-                    infinite: false,
-                    initialSlide: 1,
-                });
-                $('.fontColor-carousel').slick({
-                    infinite: false,
-                    initialSlide: 0,
-                });
-                $('.iconColor-carousel').slick({
-                    infinite: false,
-                    initialSlide: 5,
-                });
-            });
-        })();
     }
-
 }
 
 const createCards = (quote, quotee, favorite = false) => {
