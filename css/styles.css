@@ -251,15 +251,16 @@ footer {
     display: grid;
     font-family: var(--quote-font);
     font-size: var(--card-font-size);
+    font-style: italic;
+    font-weight: 400;
     grid-template-columns: 1fr 1fr;
-    height: min-content;
+    height: max-content;
     margin: 0px auto 16px auto;
     padding: 16px 12px;
     position: relative;
     row-gap: 16px;
     width: 85%;
-    font-style: italic;
-    font-weight: 400;
+    word-wrap: break-word;
 }
 
 .card-quote {
@@ -393,18 +394,17 @@ footer {
 }
 
 .quotes-container {
-    height: max-content;
-    width: 100%;
     -ms-overflow-style: none;
     align-items: center;
     display: flex;
     flex-direction: column;
+    height: max-content;
+    margin-top: 8px;
     max-height: 100%;
     max-width: 1080px;
     overflow-y: scroll;
-    margin-top: 8px;
-    width: 100%;
     scrollbar-width: none;
+    width: 100%;
 }
 
 .quotes-container::-webkit-scrollbar {
@@ -490,57 +490,62 @@ footer {
 /* SETTINGS MODAL */
 
 .settings-modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
 .settings-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    height: calc(100vh - 200px);
-    max-width: 1080px;
+    background-color: #d1af8d;
     border-radius: 10px;
     border: solid 1px black;
-    background-color: #d1af8d;
-    z-index: 1;
     font-family: var(--title-font);
+    font-size: 20px;
+    height: max-content;
+    left: 50%;
+    max-height: 600px;
+    max-width: 400px;
+    overflow-y: scroll;
     padding: 16px;
+    position: absolute;
+    scrollbar-width: none;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    z-index: 1;
+}
+
+.settings-modal::-webkit-scrollbar {
+    display: none;
 }
 
 .settings-modal p {
     font-size: 20px;
     margin: 24px 0 12px 0;
-    display: inline;
+    text-align: center;
+    width: 100%;
+    font-style: italic;
+    font-family: var(--quote-font);
+}
+
+.settings-modal p:first-of-type {
+    margin-top: 0;
 }
 
 .settings-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
     cursor: pointer;
-    transition-duration: 300ms;
     font-size: 28px !important;
+    position: sticky;
+    top: 0;
+    left: calc(100% - 24px);
+    transition-duration: 300ms;
 }
 
 .settings-close:hover {
     transform: scale(1.1) rotate(90deg);
-}
-
-.settings-modal h1 {
-    width: 100%;
-    text-align: center;
-    font-size: 42px;
-}
-
-.settings-modal {
-    font-size: 20px;
 }
 
 .opacity-carousel,
@@ -548,28 +553,38 @@ footer {
 .fontColor-carousel,
 .iconColor-carousel {
     height: max-content;
-    text-align: center;
-    width: 300px;
     margin: 0 auto;
+    max-width: 300px;
+    text-align: center;
+    width: 80%;
 }
 
 .opacity-carousel li {
-    padding: 8px 0;
     border-radius: 10px;
+    margin: 0 24px;
+    padding: 8px 0;
 }
 
 .defaults-btn {
-    border: solid 1px black;
-    padding: 4px 8px;
     border-radius: 5px;
-    margin: 16px 0;
+    border: solid 1px black;
+    cursor: pointer;
     display: block;
+    margin: 32px auto;
+    padding: 4px 8px;
     width: max-content;
+    background-color: rgba(91, 28, 1, 0.3);
+    transition: 300ms;
+}
+
+.defaults-btn:hover {
+    background-color: rgba(91, 28, 1, 0.5);
 }
 
 .settings-modal a {
     display: block;
     margin: 16px 0;
+    text-align: center;
 }
 
 
