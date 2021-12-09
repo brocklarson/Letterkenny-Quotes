@@ -253,13 +253,13 @@ const createDOM = (page = 'homepage') => {
         fontSizeOption1.setAttribute('style', 'font-size: 20px;');
         const fontSizeOption2 = document.createElement('li');
         fontSizeOption2.innerText = 'Default';
-        fontSizeOption2.setAttribute('style', 'font-size: 26px;');
+        fontSizeOption2.setAttribute('style', 'font-size: 24px;');
         const fontSizeOption3 = document.createElement('li');
         fontSizeOption3.innerText = 'Large';
-        fontSizeOption3.setAttribute('style', 'font-size: 32px;');
+        fontSizeOption3.setAttribute('style', 'font-size: 28px;');
         const fontSizeOption4 = document.createElement('li');
         fontSizeOption4.innerText = 'Largest';
-        fontSizeOption4.setAttribute('style', 'font-size: 40px;');
+        fontSizeOption4.setAttribute('style', 'font-size: 32px;');
 
         const fontColorText = document.createElement('p');
         fontColorText.innerText = 'Quote Font Color:';

@@ -223,9 +223,10 @@ const settings = () => {
     function setupCarousel() {
         $(document).ready(function() {
             const r = document.querySelector(':root');
+            const startingSlide = getInitialSlides();
             $('.opacity-carousel').slick({
                     infinite: false,
-                    initialSlide: 1,
+                    initialSlide: startingSlide[0],
                 })
                 .on('afterChange', function(event, slick, currentSlide) {
                     const slide = window.getComputedStyle($('.opacity-carousel li')[currentSlide])
@@ -235,7 +236,7 @@ const settings = () => {
                 });
             $('.fontSize-carousel').slick({
                     infinite: false,
-                    initialSlide: 1,
+                    initialSlide: startingSlide[1],
                 })
                 .on('afterChange', function(event, slick, currentSlide) {
                     const slide = window.getComputedStyle($('.fontSize-carousel li')[currentSlide])
@@ -244,7 +245,7 @@ const settings = () => {
                 });
             $('.fontColor-carousel').slick({
                     infinite: false,
-                    initialSlide: 0,
+                    initialSlide: startingSlide[2],
                 })
                 .on('afterChange', function(event, slick, currentSlide) {
                     const slide = window.getComputedStyle($('.fontColor-carousel li')[currentSlide])
@@ -253,7 +254,7 @@ const settings = () => {
                 });
             $('.iconColor-carousel').slick({
                     infinite: false,
-                    initialSlide: 5,
+                    initialSlide: startingSlide[3],
                 })
                 .on('afterChange', function(event, slick, currentSlide) {
                     const slide = window.getComputedStyle($('.iconColor-carousel li')[currentSlide])
@@ -262,6 +263,30 @@ const settings = () => {
                 });
         });
     };
+
+    function getInitialSlides() {
+        const r = document.querySelector(':root');
+        let startingSlides = [1, 1, 0, 5];
+        const opacitySlides = Array.from($('.opacity-carousel li'));
+        const fontSizeSlides = Array.from($('.fontSize-carousel li'));
+        const fontColorSlides = Array.from($('.fontColor-carousel li'));
+        const iconColorSlides = Array.from($('.iconColor-carousel li'));
+
+        startingSlides[0] = getSlideIndex(opacitySlides, '--card-opacity', 'background-color');
+        startingSlides[1] = getSlideIndex(fontSizeSlides, '--card-font-size', 'font-size');
+        startingSlides[2] = getSlideIndex(fontColorSlides, '--card-font-color', 'color');
+        startingSlides[3] = getSlideIndex(iconColorSlides, '--card-icon-color', 'color');
+        return startingSlides;
+    }
+
+    function getSlideIndex(slides, cssVar, carouselVar) {
+        return slides.findIndex(slide => {
+            const currentVal = getComputedStyle(document.body).getPropertyValue(cssVar);
+            let slideVal = getComputedStyle(slide).getPropertyValue(carouselVar);
+            if (carouselVar === 'background-color') slideVal = slideVal.replace(/^.*,(.+)\)/, '$1').replace(/\s+/g, ' ').trim();
+            if (slideVal === currentVal) return true;
+        });
+    }
 
     function destroyCarousel() {
         if ($('.opacity-carousel').hasClass('slick-initialized')) {
@@ -287,9 +312,9 @@ const settings = () => {
     function resetCSSVariables() {
         const r = document.querySelector(':root');
         r.style.setProperty('--card-opacity', '0.3');
-        r.style.setProperty('--card-font-size', '26px');
-        r.style.setProperty('--card-font-color', 'black');
-        r.style.setProperty('--card-icon-color', '#5b1c01');
+        r.style.setProperty('--card-font-size', '24px');
+        r.style.setProperty('--card-font-color', 'rgb(0, 0, 0)');
+        r.style.setProperty('--card-icon-color', 'rgb(91, 28, 1)');
     }
 }
 

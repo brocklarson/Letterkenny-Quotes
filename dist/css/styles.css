@@ -7,14 +7,14 @@
 }
 
  :root {
-    --accent-color: #5b1c01;
-    --primary-text-color: black;
+    --accent-color: rgb(91, 28, 1);
+    --primary-text-color: rgb(0, 0, 0);
     --quote-font: 'Sarabun', sans-serif;
     --title-font: 'Roboto', sans-serif;
     --card-color: 248, 248, 255;
-    --card-font-color: black;
-    --card-font-size: 26px;
-    --card-icon-color: #5b1c01;
+    --card-font-color: rgb(0, 0, 0);
+    --card-font-size: 24px;
+    --card-icon-color: rgb(91, 28, 1);
     --card-opacity: 0.3;
 }
 
@@ -230,7 +230,8 @@ footer {
     width: max-content;
 }
 
-.homepage-main .quote-card {
+.homepage-main .quote-card,
+.random-main .quote-card {
     scrollbar-width: none;
     overflow-y: scroll;
     max-height: calc(100vh - 316px);
@@ -279,6 +280,7 @@ footer {
     grid-row: 2/3;
     height: 100%;
     width: 100%;
+    word-wrap: break-word;
 }
 
 .card-heart,
@@ -287,7 +289,7 @@ footer {
     align-self: flex-end;
     color: var(--card-icon-color);
     cursor: pointer;
-    display: inline;
+    display: inline-block;
     font-size: calc(var(--card-font-size) * 1.15) !important;
     height: max-content;
     margin-right: 20px;
